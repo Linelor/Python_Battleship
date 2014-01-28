@@ -1,4 +1,5 @@
 from random import randint
+from Functions import *
  
 #Initializing the board
 board = []
@@ -15,6 +16,15 @@ player_board = board
 board_key = board
  
 #Placing the ships
+place_ship(board_key,5,"A",blank_char) #Aircraft Carrier
+place_ship(board_key,4,"B",blank_char) #Battleship
+place_ship(board_key,3,"S",blank_char) #Submarine
+place_ship(board_key,3,"D",blank_char) #Destroyer
+place_ship(board_key,2,"P",blank_char) #Patrol Boat
+
+
+
+
 ship_row = randint(0, len(board) - 1)
 ship_col = randint(0, len(board[0]) - 1)
 print (ship_row)
@@ -22,25 +32,9 @@ print (ship_col)
  
 #Beginning Greeting
 print ("Let's play Battleship!")
-print (board_key)
+print_board(board_key)
  
-#
-# Functions
-#
- 
-#Function to print the board
-def print_board(board):
-    for row in board:
-        print (" ".join(row))
-       
-#Function to place a ship of x length
-def place_ship(board,ship_size):
-    #Tries to place the ship 50 times, if it fails it gives up.
-    for each_try in range(50):
-        new_row = randint(0, board_dim-1)
-        new_col = randint(0, board_dim-1)
-        if board[new_row][new_col] == ship_char:
-            print ("hi")
+                
    
 # Everything from here on should go in your for loop!
 # Be sure to indent four spaces!
