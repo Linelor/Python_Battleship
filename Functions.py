@@ -20,7 +20,7 @@ def place_ship(board,ship_size,ship_char,blank_char):
         #sets the starting point for the ship
         new_row = randint(0, len(board)-1)
         new_col = randint(0, len(board)-1)
-        print ("new_row="+str(new_row)+", new_col="+str(new_col)) ####
+        #print ("new_row="+str(new_row)+", new_col="+str(new_col)) ####
         #sets the direction of the ship
         #1: row-1, 2: row+1, 3:col-1, 4:col+1
         row_delt = 0
@@ -38,15 +38,15 @@ def place_ship(board,ship_size,ship_char,blank_char):
         for each_cell in range(ship_size):
             cur_row = new_row+row_delt*each_cell
             cur_col = new_col+col_delt*each_cell
-            print("cur_row="+str(cur_row)+", cur_col="+str(cur_col))####
+            #print("cur_row="+str(cur_row)+", cur_col="+str(cur_col))####
             if cur_row+1 < len(board) and cur_col+1 <= len(board) and cur_row >=0 and cur_col >=0:
                 if board[cur_row][cur_col] == blank_char:
                     ignore_this=1
                 else:
-                    print("collision")
+                    #print("collision")
                     collision = True
             else:
-                print("out of bounds")
+                #print("out of bounds")
                 collision = True
 
         if collision == False:
@@ -59,8 +59,6 @@ def place_ship(board,ship_size,ship_char,blank_char):
         tries += 1
         if tries == max_tries:
             print("Max attempts exceeded for ship size" + str(ship_size))
-        if ship_created == True:
-            print("Ship created")
-    print_board(board)####
-    print(board)####
+    #print_board(board)####
+    #print(board)####
         

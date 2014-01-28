@@ -1,10 +1,11 @@
 from random import randint
+from copy import deepcopy #required to copy elements of the board
 from Functions import *
  
 #Initializing the board
 board = []
 board_dim = 10
-ships = 0
+turns = 4
 blank_char = (".")
 ship_char = ("S")
 miss_char = ("O")
@@ -12,9 +13,10 @@ hit_char = ("X")
 for x in range(board_dim):
     board.append([blank_char] * board_dim)
  
-player_board = board
-board_key = board
- 
+player_board = deepcopy(board)
+board_key = deepcopy(board)
+
+
 #Placing the ships
 place_ship(board_key,5,"A",blank_char) #Aircraft Carrier
 place_ship(board_key,4,"B",blank_char) #Battleship
@@ -25,6 +27,7 @@ place_ship(board_key,2,"P",blank_char) #Patrol Boat
 
 
 
+# Remove this after fixing guns
 ship_row = randint(0, len(board) - 1)
 ship_col = randint(0, len(board[0]) - 1)
 print (ship_row)
@@ -32,30 +35,40 @@ print (ship_col)
  
 #Beginning Greeting
 print ("Let's play Battleship!")
-print_board(board_key)
+print_board(board_key) ### for debugging
+print("")
  
                 
-   
-# Everything from here on should go in your for loop!
-# Be sure to indent four spaces!
-for turn in range(4):
-   
+#Main Game
+for turn in range(turns):
+    # Asks user for their guess
+    print("Turn: "+str(turn+1)+" of "+str(turns))
+    print_board(player_board)
     guess_row = int(input("Guess Row:"))
     guess_col = int(input("Guess Col:"))
-   
-    if guess_row == ship_row and guess_col == ship_col:
-        print ("Congratulations! You sunk my battleship!")
-        break
+
+    if ((guess_row < 0 or guess_row > board_dim) or
+        (guess_col < 0 or guess_col > board_dim)):
+        print("Oops, that's not even in the ocean!")
+    elif (player_board[guess_row][guess_col] == hit_char or
+        player_board[guess_row][guess_col] == miss_char):
+        print("You already shot there!")
+    elif(board_key[guess_row][guess_col] == blank_char):
+        print("You missed!")
+        player_board[guess_row][guess_col] = miss_char
     else:
-        if (guess_row < 0 or guess_row > 4) or (guess_col < 0 or guess_col > 4):
-            print ("Oops, that's not even in the ocean.")
-        elif(board[guess_row][guess_col] == hit_char):
-            print ("You guessed that one already.")
-        else:
-            print ("You missed my battleship!")
-            board[guess_row][guess_col] = hit_char
-            if turn == 3:
-                print ("Game Over")
+        print("HIT!!")
+        player_board[guess_row][guess_col] = hit_char
+        ## Need to implement way to see if all ships were hit
+
+
+    
+
+        #print ("Congratulations! You sunk my battleship!")
+        #break
+  
+            #if turn == 3:
+              #  print ("Game Over")
         # Print (turn + 1) here!
-        print (str(turn+1))
-        print_board(board)
+        #print (str(turn+1))
+        #print_board(board)
