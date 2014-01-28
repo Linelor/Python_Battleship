@@ -1,0 +1,1 @@
+This is a python program based on the project on code academy. It is solely for my own use.
